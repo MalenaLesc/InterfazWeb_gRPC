@@ -4,12 +4,15 @@ import {
   UsuarioIdRequest,
   UsuarioEmailRequest,
   UsuarioNombreRequest,
-  LoginRequest
+  LoginRequest,
 } from "./usuario_pb";
+import { Empty } from 'google-protobuf/google/protobuf/empty_pb';
+
 
 const client = new UsuarioServiceClient('http://localhost:8081', null, null);
 
 export const loginGrpcWeb = (identificador, password) => {
+
   return new Promise((resolve, reject) => {
     const request = new LoginRequest();
     request.setIdentificador(identificador);
@@ -31,14 +34,14 @@ export const loginGrpcWeb = (identificador, password) => {
 
 export const listarUsuarios = () => {
   return new Promise((resolve, reject) => {
-    client.listarTodos({}, {}, (err, response) => {
+    const request = new Empty(); 
+    client.listarTodos(request, {}, (err, response) => {
       if (err) return reject(err);
       const usuarios = response.getUsuariosList().map(u => u.toObject());
       resolve(usuarios);
     });
   });
 };
-
 
 export const buscarUsuarioPorId = (id) => {
   return new Promise((resolve, reject) => {
@@ -52,7 +55,6 @@ export const buscarUsuarioPorId = (id) => {
   });
 };
 
-
 export const buscarUsuarioPorEmail = (email) => {
   return new Promise((resolve, reject) => {
     const request = new UsuarioEmailRequest();
@@ -64,7 +66,6 @@ export const buscarUsuarioPorEmail = (email) => {
     });
   });
 };
-
 
 export const buscarUsuarioPorNombreUsuario = (nombreUsuario) => {
   return new Promise((resolve, reject) => {
@@ -78,9 +79,7 @@ export const buscarUsuarioPorNombreUsuario = (nombreUsuario) => {
   });
 };
 
-
 //altaUsuario: crea un usuario
-
 export const altaUsuario = (usuarioData) => {
   return new Promise((resolve, reject) => {
     const usuario = new Usuario();
@@ -120,6 +119,5 @@ export const bajaUsuario = (id) => {
     });
   });
 };
-
 
 const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);

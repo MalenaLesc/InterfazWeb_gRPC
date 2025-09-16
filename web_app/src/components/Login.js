@@ -25,29 +25,31 @@ const Login = ({ onLoginSuccess }) => {
 
     <div className="login-container">
       <div className="login-card">
-      <h2 className="login-title">Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label>Email o Nombre de Usuario:</label>
-        <input
-          type="text"
-          value={identificador}
-          onChange={(e) => setIdentificador(e.target.value)}
-          placeholder="Ingrese su email o usuario"
-        />
+        <h2 className="login-title">Iniciar Sesión</h2>
+        <form onSubmit={handleSubmit} className="login-form">
+          <label htmlFor="username">Email o Nombre de Usuario:</label>
+          <input
+            type="text"
+            value={identificador}
+            onChange={(e) => setIdentificador(e.target.value)}
+            placeholder="Ingrese su email o usuario"
+            id="username"
+          />
 
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Ingrese su contraseña"
-        />
+          <label htmlFor="password">Contraseña:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Ingrese su contraseña"
+            id="password"
+          />
 
-        <button type="submit" className="login-button">Ingresar</button>
+          <button type="submit" className="login-button">Ingresar</button>
 
-        {error && <p className="error-message">{error}</p>}
-      </form>
-        </div>
+          {error && <p className="error-message">{error}</p>}
+        </form>
+      </div>
     </div>
 
   );

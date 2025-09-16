@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Login from "./components/Login";
+import Menu from "./components/Menu";
 
 function App() {
   const [usuario, setUsuario] = useState(null);
@@ -9,10 +10,9 @@ function App() {
       {!usuario ? (
         <Login onLoginSuccess={setUsuario} />
       ) : (
-        <div>
-          <h2>Bienvenido {usuario.nombre}</h2>
-          <p>Email: {usuario.email}</p>
-        </div>
+          <div>
+            <Menu user={usuario} />
+          </div>       
       )}
     </div>
   );

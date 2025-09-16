@@ -5,7 +5,7 @@ const Usuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    const fetchUsuarios = async () => {
+    const getListaUsuarios = async () => {
       try {
         const lista = await listarUsuarios();
         setUsuarios(lista);
@@ -14,7 +14,7 @@ const Usuarios = () => {
       }
     };
 
-    fetchUsuarios();
+    getListaUsuarios();
   }, []);
 
   return (

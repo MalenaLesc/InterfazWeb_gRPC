@@ -5,10 +5,11 @@ import Evento from "./Evento";
 
 
 function Menu({ user, onLogout }) {
+
   return (
     <div>
       <h2>
-        Bienvenido, {user.nombreUsuario} ({user.rol})
+        Bienvenido, {user.nombre} ({user.rol})
       </h2>
       <button onClick={onLogout}>Cerrar sesión</button>
 
