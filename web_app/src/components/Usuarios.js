@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { listarUsuarios } from "../servicios/grpcCliente";
 
-const Usuarios = () => {
-  const [usuarios, setUsuarios] = useState([]);
+const Usuario = () => {
+  const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
     const getListaUsuarios = async () => {
       try {
         const lista = await listarUsuarios();
-        setUsuarios(lista);
+        setUsuario(lista);
       } catch (err) {
         console.error("Error cargando usuarios:", err);
       }
@@ -21,7 +21,7 @@ const Usuarios = () => {
     <div>
       <h2>Lista de Usuarios</h2>
       <ul>
-        {usuarios.map((u) => (
+        {usuario.map((u) => (
           <li key={u.id}>
             {u.nombre} {u.apellido} - {u.rol} - {u.email}
           </li>
@@ -31,4 +31,4 @@ const Usuarios = () => {
   );
 };
 
-export default Usuarios;
+export default Usuario;

@@ -1,4 +1,4 @@
-import { UsuarioServiceClient } from "./usuario_grpc_web_pb";
+import { UsuarioServiceClient, EventoSolidarioServiceClient } from "./usuario_grpc_web_pb";
 import {
   Usuario,
   UsuarioIdRequest,
@@ -10,10 +10,12 @@ import { Empty } from 'google-protobuf/google/protobuf/empty_pb';
 
 
 const client = new UsuarioServiceClient('http://localhost:8081', null, null);
+const eventoClient = new EventoSolidarioServiceClient('http://localhost:8081', null, null);
 
 export const loginGrpcWeb = (identificador, password) => {
 
   return new Promise((resolve, reject) => {
+
     const request = new LoginRequest();
     request.setIdentificador(identificador);
     request.setPassword(password);
@@ -121,3 +123,18 @@ export const bajaUsuario = (id) => {
 };
 
 const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+//listarEventos: obtiene todos los eventos
+
+export const listarEventos = () => {
+  return new Promise((resolve, reject) => {
+    const request = new Empty();
+
+    eventoClient.listarEventos(request, {}, (err, response) => {
+      if (err) return reject(err);
+
+      const eventos = response.getEventosList().map(e => e.toObject());
+      resolve(eventos);
+    });
+  });
+};

@@ -3,16 +3,14 @@ import Login from "./components/Login";
 import Menu from "./components/Menu";
 
 function App() {
-  const [usuario, setUsuario] = useState(null);
+  const [usuarios, setUsuarios] = useState(null);
 
   return (
     <div>
-      {!usuario ? (
-        <Login onLoginSuccess={setUsuario} />
+      {usuarios ? (
+        <Menu usuarios={usuarios} onLogout={() => setUsuarios(null)} />
       ) : (
-          <div>
-            <Menu user={usuario} />
-          </div>       
+        <Login onLoginSuccess={setUsuarios} />
       )}
     </div>
   );
