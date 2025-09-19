@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { listarEventos} from "../servicios/grpcCliente";
+import "./Evento.css";
 
 const Evento = () => {
   const [evento, setEvento] = useState([]);
@@ -19,20 +20,26 @@ const Evento = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Lista de Eventos</h2>
-      <ul>
+    <div className="evento-card">
+      <h2 className="section-title">📅 Lista de Eventos</h2>
+      <ul className="evento-list">
         {evento.map((e) => (
-          <li key={e.id}>
-            <strong>{e.nombreevento}</strong> - {e.fechahoraevento} - {e.descripcion}
+          <li key={e.id} className="evento-item">
+            <div className="evento-header">
+              <strong>{e.nombreevento}</strong>
+              <span className="evento-date">{e.fechahoraevento}</span>
+            </div>
+            <p className="evento-desc">{e.descripcion}</p>
 
-            <ul>
-              {(e.participanteseventoList || []).map((p) => (
-                <li key={p.id}>
-                  {p.nombre} {p.apellido}
-                </li>
-              ))}
-            </ul>
+            {e.participanteseventoList?.length > 0 && (
+              <ul className="participantes-list">
+                {e.participanteseventoList.map((p) => (
+                  <li key={p.id} className="participante-item">
+                    👤 {p.nombre} {p.apellido}
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>

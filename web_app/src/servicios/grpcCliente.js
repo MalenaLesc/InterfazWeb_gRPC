@@ -1,4 +1,4 @@
-import { UsuarioServiceClient, EventoSolidarioServiceClient } from "./usuario_grpc_web_pb";
+import { UsuarioServiceClient, EventoSolidarioServiceClient, InventarioDonacionesServiceClient } from "./usuario_grpc_web_pb";
 import {
   Usuario,
   UsuarioIdRequest,
@@ -11,6 +11,7 @@ import { Empty } from 'google-protobuf/google/protobuf/empty_pb';
 
 const client = new UsuarioServiceClient('http://localhost:8081', null, null);
 const eventoClient = new EventoSolidarioServiceClient('http://localhost:8081', null, null);
+const inventarioClient = new  InventarioDonacionesServiceClient('http://localhost:8081', null, null);
 
 export const loginGrpcWeb = (identificador, password) => {
 
@@ -135,6 +136,22 @@ export const listarEventos = () => {
 
       const eventos = response.getEventosList().map(e => e.toObject());
       resolve(eventos);
+    });
+  });
+};
+
+
+//listarInventario: obtiene todos los elementos del inventario
+
+export const listarInventario = () => {
+  return new Promise((resolve, reject) => {
+    const request = new Empty();
+
+    inventarioClient.listarTodos (request, {}, (err, response) => {
+      if (err) return reject(err);
+
+      const inventario = response.getInventariosList().map(i => i.toObject());
+      resolve(inventario);
     });
   });
 };
