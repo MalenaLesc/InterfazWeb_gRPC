@@ -1,4 +1,4 @@
-/* Card general */
+
 .evento-card, .usuario-card {
   background-color: #fff;
   border-radius: 12px;
@@ -8,7 +8,7 @@
   max-width: 700px;
 }
 
-/* Títulos */
+
 .section-title {
   font-size: 1.4rem;
   font-weight: bold;
@@ -17,14 +17,14 @@
   text-align: center;
 }
 
-/* Listas */
+
 .evento-list, .usuario-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Items */
+
 .evento-item, .usuario-item {
   padding: 0.8rem;
   border-bottom: 1px solid #eee;
@@ -34,7 +34,7 @@
   border-bottom: none;
 }
 
-/* Evento específico */
+
 .evento-header {
   display: flex;
   justify-content: space-between;
@@ -59,7 +59,7 @@
   color: #444;
 }
 
-/* Usuario específico */
+
 .usuario-nombre {
   font-weight: 600;
   color: #333;
